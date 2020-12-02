@@ -7,7 +7,7 @@ before_install:
 
 install:
   - sudo apt build-dep dleyna-core
-  - suda apt install clang-tools
+  - sudo apt install clang-tools
 
 jobs:
     include:
