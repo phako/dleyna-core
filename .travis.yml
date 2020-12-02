@@ -7,7 +7,20 @@ before_install:
 
 install:
   - sudo apt build-dep dleyna-core
+  - suda apt install clang-tools
 
-script:
-  - ./autogen.sh --enable-debug --disable-Werror
-  - make
+jobs:
+    include:
+        - stage: build
+          env: NOCONFIGURE=1
+          script:
+              - ./autogen.sh
+              - mkdir build-plain
+              - (cd build-plain && ./configure --enable-debug --disable-Werror)
+              - make -C build-plain
+        - stage: scan-build
+          script:
+              - mkdir build-scan
+              - (cd build-scan && scan-build ./configure --enable-debug --disable-Werror)
+              - scan-build make -C build-scan
+
