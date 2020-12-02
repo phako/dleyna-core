@@ -1,0 +1,13 @@
+language: C
+dist: focal
+sudo: true
+
+before_install:
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt build-dep dleyna-core
+
+script:
+  - ./autogen.sh --enable-debug --disable-Werror
+  - make
