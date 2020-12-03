@@ -16,11 +16,11 @@ jobs:
           script:
               - ./autogen.sh
               - mkdir build-plain
-              - (cd build-plain && ./configure --enable-debug --disable-Werror)
+              - (cd build-plain && ../configure --enable-debug --disable-Werror)
               - make -C build-plain
         - stage: scan-build
           script:
               - mkdir build-scan
-              - (cd build-scan && scan-build ./configure --enable-debug --disable-Werror)
+              - (cd build-scan && scan-build ../configure --enable-debug --disable-Werror)
               - scan-build make -C build-scan
 
