@@ -257,12 +257,12 @@ void dleyna_task_processor_set_quitting(dleyna_task_processor_t *processor)
 	DLEYNA_LOG_DEBUG("Enter");
 
 	processor->quitting = TRUE;
-
-	if (processor->running_tasks == 0)
-		g_idle_add(processor->on_quit_cb, NULL);
-
 	prv_cancel_all_queues(processor);
-	g_hash_table_remove_all(processor->task_queues);
+
+	if (processor->running_tasks == 0) {
+		g_idle_add(processor->on_quit_cb, NULL);
+		g_hash_table_remove_all(processor->task_queues);
+	}
 
 	DLEYNA_LOG_DEBUG("Exit");
 }
