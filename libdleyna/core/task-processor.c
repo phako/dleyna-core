@@ -285,7 +285,7 @@ static gboolean prv_free_queue_for_source(gpointer key, gpointer value,
 
 	if (!strcmp(source, queue_key->source) && !queue->defer_remove) {
 		queue->defer_remove = (queue->current_task != NULL);
-		prv_cancel(queue_key, queue);
+		prv_cancel_only(queue_key, queue);
 
 		if (!queue->defer_remove) {
 			DLEYNA_LOG_DEBUG("Removing queue <%s,%s>",
@@ -320,7 +320,7 @@ static gboolean prv_free_queue_for_sink(gpointer key, gpointer value,
 
 	if (!strcmp(sink, queue_key->sink) && !queue->defer_remove) {
 		queue->defer_remove = (queue->current_task != NULL);
-		prv_cancel(queue_key, queue);
+		prv_cancel_only(queue_key, queue);
 
 		if (!queue->defer_remove) {
 			DLEYNA_LOG_DEBUG("Removing queue <%s,%s>",
