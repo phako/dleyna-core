@@ -96,6 +96,11 @@ static void prv_free_cb(gpointer data)
 
 	DLEYNA_LOG_DEBUG("Enter");
 
+	if (task_queue->idle_id) {
+		g_source_remove(task_queue->idle_id);
+		task_queue->idle_id = 0;
+	}
+
 	g_ptr_array_foreach(task_queue->tasks, prv_task_free_cb, task_queue);
 	g_ptr_array_unref(task_queue->tasks);
 
