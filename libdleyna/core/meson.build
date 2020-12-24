@@ -50,7 +50,7 @@ libdleyna_core = library(
 
 core_dep = declare_dependency(
     link_with: libdleyna_core,
-    include_directories: include_directories('.')
+    include_directories: include_directories('../..')
 )
 
 pkg.generate(
