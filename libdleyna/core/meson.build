@@ -48,6 +48,11 @@ libdleyna_core = library(
     install : true
 )
 
+core_dep = declare_dependency(
+    link_with: libdleyna_core,
+    include_directories: include_directories('.')
+)
+
 pkg.generate(
     libdleyna_core,
     description : 'UPnP & DLNA core library',
@@ -55,3 +60,5 @@ pkg.generate(
     version: meson.project_version(),
     requires: ['gupnp-1.2', 'glib-2.0', 'gio-2.0'],
 )
+
+meson.override_dependency('dleyna-core-1.0', core_dep)
