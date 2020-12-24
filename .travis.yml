@@ -6,8 +6,9 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt build-dep dleyna-core
+  - sudo apt install libglib2.0-dev libgupnp-1.2-dev
+  - sudo apt install meson ninja-build
 
 script:
-  - ./autogen.sh --enable-debug --disable-Werror
-  - make
+  - meson build
+  - ninja -C build
