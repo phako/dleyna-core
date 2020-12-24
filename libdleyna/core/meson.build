@@ -53,4 +53,5 @@ pkg.generate(
     description : 'UPnP & DLNA core library',
     subdirs : 'dleyna-1.0',
     version: meson.project_version(),
+    requires: ['gupnp-1.2', 'glib-2.0', 'gio-2.0'],
 )
