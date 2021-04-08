@@ -1,3 +1,10 @@
+version 0.7.0
+	- Port to GUPnP 1.2 API
+	- Switch build system to meson
+	- Make connector search path overridable by setting DLEYNA_CONNECTOR_PATH
+	  environment variable
+	- Stability improvements for the task processor (PR#1 and PR#2)
+
 version 0.6.0
 	- Merge pull request #43
 	- Added new core.c and core.h to add new function dleyna_core_prv_conve
