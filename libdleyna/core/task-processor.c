@@ -96,6 +96,11 @@ static void prv_free_cb(gpointer data)
 
 	DLEYNA_LOG_DEBUG("Enter");
 
+	if (task_queue->idle_id) {
+		g_source_remove(task_queue->idle_id);
+		task_queue->idle_id = 0;
+	}
+
 	g_ptr_array_foreach(task_queue->tasks, prv_task_free_cb, task_queue);
 	g_ptr_array_unref(task_queue->tasks);
 
@@ -252,12 +257,12 @@ void dleyna_task_processor_set_quitting(dleyna_task_processor_t *processor)
 	DLEYNA_LOG_DEBUG("Enter");
 
 	processor->quitting = TRUE;
-
-	if (processor->running_tasks == 0)
-		g_idle_add(processor->on_quit_cb, NULL);
-
 	prv_cancel_all_queues(processor);
-	g_hash_table_remove_all(processor->task_queues);
+
+	if (processor->running_tasks == 0) {
+		g_idle_add(processor->on_quit_cb, NULL);
+		g_hash_table_remove_all(processor->task_queues);
+	}
 
 	DLEYNA_LOG_DEBUG("Exit");
 }
