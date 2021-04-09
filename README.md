@@ -16,7 +16,7 @@ follows:
 
    Clone repository
 ```
-     # git clone git://github.com/phako/dleyna-core.git
+     # git clone https://github.com/phako/dleyna-core.git
      # cd dleyna-core
 ```
    Configure and build
